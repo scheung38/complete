@@ -12,6 +12,18 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
+
+
+        apply plugin: 'war'
+
+        war {
+            baseName = 'complete'
+            version = '0.0.1'
+        }
+
+
+
+
 jar {
     baseName = 'gs-rest-service'
     version =  '0.1.0'
@@ -19,13 +31,29 @@ jar {
 
 repositories {
     mavenCentral()
+
+
+        jcenter()
+        maven { url "http://repo.spring.io/libs-snapshot" }
+
+
 }
+
+
+        configurations {
+            provideRuntime
+        }
+
+
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
+
+            provideRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('com.jayway.jsonpath:json-path')
 }
